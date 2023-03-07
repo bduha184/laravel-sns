@@ -2,6 +2,7 @@
     <x-slot name="title">
         記事投稿
     </x-slot>
+    @include('nav')
     <div class="container">
         <div class="row">
             <div class="col-12">
