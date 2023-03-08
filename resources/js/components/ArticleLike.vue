@@ -22,6 +22,13 @@ export default {
             type: Number,
             default: 0,
         },
+        authorized: {
+            type: Boolean,
+            default: false,
+        },
+        endpoint: {
+            type: String,
+        },
     },
     data() {
         return {
