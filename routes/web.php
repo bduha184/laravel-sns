@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [ArticleController::class,'index'])->name('articles.index');
-Route::resource('/articles',ArticleController::class)->except(['index','show'])->middleware('auth');
-Route::resource('/articles',ArticleController::class)->only(['show']);
+Route::resource('/articles','ArticleController')->except(['index','show'])->middleware('auth');
+Route::resource('/articles','ArticleController')->only(['show']);
 Route::prefix('articles')->name('articles.')->group(function(){
-    Route::put('/{article}/like',ArticleController::class,'like')->name('like')->middleware('auth');
-    Route::delete('/{article}/unlike',ArticleController::class,'unlike')->name('unlike')->middleware('auth');
+    Route::put('/{article}/like',[ArticleController::class,'like'])->name('like')->middleware('auth');
+    Route::delete('/{article}/unlike',[ArticleController::class,'unlike'])->name('unlike')->middleware('auth');
 });
