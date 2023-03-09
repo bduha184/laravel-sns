@@ -1,8 +1,10 @@
 <template>
     <div>
+        <input type="hidden" name="tags" id="tagsJson">
         <vue-tags-input
             v-model="tag"
             :tags="tags"
+            placeholder="タグを５個まで入力できます"
             :autocomplete-items="filteredItems"
             @tags-changed="(newTags) => (tags = newTags)"
         />
@@ -47,6 +49,9 @@ export default {
                 );
             });
         },
+    },
+    tagsJson(){
+        return JSON.stringify(this.tags)
     },
 };
 </script>
