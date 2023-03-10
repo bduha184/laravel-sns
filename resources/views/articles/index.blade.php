@@ -5,7 +5,7 @@
     @include('nav')
     <div class="container">
         @foreach ($articles as $article)
-            @include('articles.card');
+            @include('articles.card')
         @endforeach
     </div>
 </x-app>
