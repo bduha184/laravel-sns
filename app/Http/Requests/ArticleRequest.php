@@ -40,7 +40,7 @@ class ArticleRequest extends FormRequest
         $this->tags = collect(json_decode($this->tags))
             ->slice(0, 5)
             ->map(function ($requestTag) {
-                return $requestTag->text;
+                return $requestTag;
             });
     }
 }
