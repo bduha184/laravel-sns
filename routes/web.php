@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,6 @@ Route::prefix('articles')->name('articles.')->group(function(){
 });
 
 Route::get('/tags/{name}',[TagController::class,'show'])->name('tags.show');
+Route::prefix('users')->name('users.')->group(function(){
+    Route::get('/{name}',[UserController::class,'show'])->name('show');
+});
