@@ -4,6 +4,7 @@
         <vue3-tags-input
             :tags="tags"
             placeholder="タグを５個まで入力できます"
+            :autocomplete-items="filteredItems"
             @on-tags-changed="(newTags) => (tags = newTags)"
         />
     </div>
@@ -22,13 +23,25 @@ export default defineComponent({
             type: Array,
             default: [],
         },
+        autocompleteItems: {
+            type: Array,
+            default: [],
+        },
     },
     data() {
         return {
+            tag: "",
             tags: this.initialTags,
         };
     },
     computed: {
+        // filteredItems() {
+        //     return this.autocompleteItems.filter((i) => {
+        //         return (
+        //             i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1
+        //         );
+        //     });
+        // },
         tagsJson() {
             return JSON.stringify(this.tags);
         },
@@ -36,4 +49,8 @@ export default defineComponent({
 });
 </script>
 <style lang="css" scoped></style>
-<style lang="css"></style>
+<style lang="css">
+.v3ti-tag span::before {
+    content: "#";
+  }
+  </style>

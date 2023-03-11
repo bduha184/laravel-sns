@@ -23,7 +23,13 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('articles.create');
+
+        $allTagNames = Tag::all()->map(function($tag){
+            return $tag->name;
+        });
+        return view('articles.create',[
+            'allTagNames'=>$allTagNames,
+        ]);
     }
 
     public function store(ArticleRequest $request, Article $article)
@@ -43,9 +49,14 @@ class ArticleController extends Controller
         $tags=$article->tags->map(function($tag){
             return $tag->name;
         });
+
+        $allTagNames = Tag::all()->map(function($tag){
+            return $tag->name;
+        });
         return view('articles.edit',[
             'article'=>$article,
             'tags'=>$tags,
+            'allTagNames' => $allTagNames,
         ]);
     }
 

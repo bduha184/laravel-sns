@@ -6,6 +6,7 @@
 <div class="form-group">
     <article-tags-input
     :initial-tags='@json($tags ?? [])'
+    :autocomplete-items='@json($allTagNames ?? [])'
     >
     </article-tags-input>
   </div>
