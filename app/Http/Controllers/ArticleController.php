@@ -41,7 +41,13 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $tags=$article->tags->map(function($tag){
+            return $tag->name;
+        });
+        return view('articles.edit',[
+            'article'=>$article,
+            'tags'=>$tags,
+        ]);
     }
 
     public function update(Request $request, Article $article)
