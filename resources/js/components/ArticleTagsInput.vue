@@ -25,7 +25,6 @@ export default defineComponent({
     },
     data() {
         return {
-            tag: "",
             tags: this.initialTags,
         };
     },
