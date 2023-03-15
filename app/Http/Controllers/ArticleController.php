@@ -17,7 +17,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::latest()->get();
+        $articles = Article::latest()->get()->load(['user','tags','likes']);
         return view('articles.index', compact('articles'));
     }
 
