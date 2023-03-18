@@ -27,6 +27,7 @@ Route::prefix('login')->name('login.')->group(function () {
 
 Route::prefix('register')->name('register.')->group(function(){
     Route::get('/{provider}',[RegisterController::class,'showProviderUserRegistrationForm'])->name('{provider}');
+    Route::post('/{provider}',[RegisterController::class,'registerProviderUser'])->name('{provider}');
 });
 
 Route::get('/', [ArticleController::class, 'index'])->name('articles.index');

@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string','alpha_num','min:2' ,'max:16','unique:users'],
+            'name' => ['required', 'string', 'alpha_num', 'min:2', 'max:16', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -84,5 +84,28 @@ class RegisterController extends Controller
             'email' => $providerUser->getEmail(),
             'token' => $token,
         ]);
+    }
+
+    public function registerProviderUser(Request $request, string $provider)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'alpha_num', 'min:3', 'max:16', 'unique:users'],
+            'token' => ['required', 'string'],
+        ]);
+
+        $token = $request->token;
+
+        $providerUser = Socialite::driver($provider)->userFromToken($token);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $providerUser->getEmail(),
+            'password' => null,
+        ]);
+
+        $this->guard()->login($user, true);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 }
